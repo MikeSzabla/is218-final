@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Azuretorial - Docker</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+    <style>
+        .content-col{
+            border: 1px solid #212529;
+        }
+    </style>
+</head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Azuretorial</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/tutorial/">Tutorial</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link active dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/tools/git/">Git</a></li>
+                        <li><a class="dropdown-item" href="/tools/docker/">Docker</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="/tools/linux/">Linux Commands</a></li>
+                        <li><a class="dropdown-item" href="/tools/vi/">Vi Editor</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page content-->
+<div class="container">
+    <div class="row justify-content-between">
+        <div class="col">
+            <div class="mt-5">
+                <h1>Tools: Docker</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 content-col rounded mt-2">
+            <p class="lead">Content<br>
+                <a href="#overview">Overview</a><br>
+                <a href="#installation">Installation</a><br>
+                <a href="#commands">Commands</a>
+            </p>   
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h1 id="content">Overview</h1>
+            <p class="lead">Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers. Containers are isolated from one another and bundle their own software, libraries and configuration files; they can communicate with each other through well-defined channels.</p>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h1 id="installation">Installation</h1>
+            <p class="lead"> While a full guide can be found here - <a href="url">https://docs.docker.com/desktop/windows/install/</a> , here's a couple of steps to intall it on your own.
+            <br> 1. The First step is to download Docker for your operating system of choice
+            <br> 2. Once thats done, Start up the app
+            <br> 3. Continue with the quick start guide 
+            <br> 4. Finally create an account and you're all good to go </p>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h1 id="commands">Commands</h1>
+            <p class="lead"> docker stop CONTAINERNAME = stops the webserver
+                             <br> docker rm CONTAINERNAME = removes the container
+                             <br> docker prune = releases the resources that were used for container groups (solves the issue with reaching the quota of container groups)
+                             <br> docker build -t CONTAINER-NAME . = creates a container with the name CONTAINER-NAME
+                             <br> docker run -dp x:x CONTAINER-NAME = runs the container name CONTAINER-NAME on the port x (ie 80:80 runs on port 80)
+                             <br> docker ps = displays information about the containers running such as their ID
+                             <br> docker push docker/CONTAINER-NAME = pushes the container with the tag CONTAINER-NAME to your docker repository
+                             <br> docker login -u YOUR-USER-NAME = logs in to the docke account that you put in “YOUR-USER-NAME”
+                             <br> docker tag CONTAINER-NAME YOUR-USER-NAME/CONTAINER-NAME = gives your container the tag CONTAINER-NAME so that it can be seen and called. </p>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+</body>
+</html>

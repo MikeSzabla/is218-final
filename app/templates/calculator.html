@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Calculator{% endblock %}
+{% block content %}
+    <!-- Page content-->
+    <div class="container">
+        <div class="mt-5">
+            <h1>Calculator</h1>
+            <form action="#" method="post">
+                <p>Value 1:</p>
+                <p><input type="number" name="val1"></p>
+                <p>Value 2:</p>
+                <p><input type="number" name="val2"></p>
+                <p>Operation:</p>
+                <select id="operation" name="operation">
+                    <option value="addition">Addition</option>
+                    <option value="subtraction">Subtraction</option>
+                    <option value="multiplication">Multiplication</option>
+                    <option value="division">Division</option>
+                </select>
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+{% endblock %}

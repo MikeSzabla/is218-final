@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Azuretorial</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Azuretorial</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/tutorial/">Tutorial</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/tools/git/">Git</a></li>
+                        <li><a class="dropdown-item" href="/tools/docker/">Docker</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="/tools/linux/">Linux Commands</a></li>
+                        <li><a class="dropdown-item" href="/tools/vi/">Vi Editor</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page content-->
+<div class="container">
+    <div class="mt-5">
+        <h1>Make a Basic Webpage</h1>
+        <br>
+        <p>The most basic webpage simply consists of an ‘index.html’ file containing some HTML code. Let’s start off by
+            creating a project directory that will contain our code as well as any config files. Let's also make a
+            ‘public_html’ folder to contain our ‘index.html’ file as that is where we will tell Apache/Docker to look
+            for it.</p>
+        <p>There are plenty of tutorials online that cover everything from basic to advanced HTML. For now, a basic
+            “Hello world!” placeholder page will do.</p>
+        <code class="text-black">index.html</code>
+<code>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #007700">&lt;html&gt;</span>
+    <span style="color: #007700">&lt;head&gt;</span>
+        <span style="color: #007700">&lt;title&gt;</span>Example<span style="color: #007700">&lt;/title&gt;</span>
+    <span style="color: #007700">&lt;/head&gt;</span>
+    <span style="color: #007700">&lt;body&gt;</span>
+        <span style="color: #007700">&lt;p&gt;</span>Hello world!<span style="color: #007700">&lt;/p&gt;</span>
+    <span style="color: #007700">&lt;/body&gt;</span>
+<span style="color: #007700">&lt;/html&gt;</span></pre></div>
+</code>
+        <br>
+        <p>While we can make this file using a graphical text editor, it is useful to know how to use a command-line
+            text editor as it is common to work with GUI-less Linux servers in the development/IT world and in such
+            cases, tools like Vi, Vim, or Nano are the only option. As Vi is universally the most common built-in
+            command-line text editor, we have dedicated a page to using it in the ‘Tools’ section.
+            <a href="/tools/vi/">Learn more about Vi</a></p>
+        <p>Once you are comfortable with using Vi, continue to the next section.</p>
+        </br>
+        <a href="/tutorial/3/">Continue to Part 3: Create a Docker Container</a>
+        <br><br>
+    </div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+</body>
+</html>

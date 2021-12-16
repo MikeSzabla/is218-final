@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>AAA Testing</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<style>
+    #container {
+        background-color: #000000;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        padding: 1em;
+    }
+
+    #content {
+        color: #ffffff;
+        font-size: 14px;
+        font-family: monospace;
+    }
+</style>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">IS128 Tutorials</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/tutorial/">Tutorial</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/tools/git/">Git</a></li>
+                        <li><a class="dropdown-item" href="/tools/docker/">Docker</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="/tools/linux/">Linux Commands</a></li>
+                        <li><a class="dropdown-item" href="/tools/vi/">Vi Editor</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page content-->
+<div class="container">
+    <div class="mt-5">
+        <h1>AAA Testing</h1>
+        <br>
+        <h3>How to Test Your Methods</h3>
+        <p>A common issue most programmers face is making changes to methods or functions and later finding out those changes has unexpected consequences. 
+            Especially when projects begin to grow, it's important to set up your program to catch mistakes before they can make a mess. Here is where AAA testing comes in.</p>
+
+        <p>AAA stands for "Arrange, Act, Assert".</p>
+        
+        <p>To arrage means to set up the conditions for a test, i.e. if you're testing a method that checks the length of a list, here is where you would create a list.<br>
+            To act means to perform the action you plan on testing. Using the list length example, here we would call the length method.<br>
+            To assert means to check if our act did what we expected. In python, we will be using the <code>assert</code> keyword to evaulate a boolean expression which checks 
+            to see if our act was successful. For our length example, this could be done by asserting that our list length is what we expect it to be.
+        </p>
+
+        <p>Let's look at a code snippet from the Calculator add to see how AAA testing works: (You can view the scripts used <a href="https://github.com/MikeSzabla/IS218Project2_examplecode/tree/article2">here</a>)</p>
+
+        <pre><code class="python">
+            def test_calculator_add_static():
+                """Testing the add function of the calculator"""
+                NewCalculator = Calculator()    # arrange
+                NewCalculator.add_number((1, 1))   # act
+                last_operation = NewCalculator.get_last_operation()
+                assert isinstance(last_operation, Addition) # assert
+            </code>
+            </pre>
+
+        <p>In this test method, I am testing the effectiveness of the addition method by checking if the addition I performed in the act was added to the calculator's history. 
+        I'm not checking to see the result of the addition, since there is a separate test for the addition so check if it works arithmetically. 
+        This is a simple, hard-coded test that will perform similarly in all situations. However, there exist situations where it's useful to supply a large amount of test cases 
+        to see how the methods will perform under different conditions.</p>
+
+        <p>Testing your code with a systematic method like this is important because as your project grow in scale and more elements become more reliant on each other, 
+            it becomes very easy to make a change that seems like a bug fix but unintentionally breaks something far from where you made your change. Unit testing provides 
+            a safe and deterministic way to ensure any changes you make to your code won't affect other parts of your program.
+        </p>
+            
+        <p>Hard-coding tests for methods like that is difficult and not scalable. The solution to this is using external data files filled with the test case values. 
+        These files can then be read in and passed into the test methods iteratively. This process allows for large amounts of test cases to be created efficiently 
+        and without cluttering the program.</p>
+
+        <p>Using the pandas library, we can read in a csv file filled with test case values straight into our test function. Here's the addition method being tested with this method: </p>
+
+        <div id="container">
+            <div id="content">
+              <p>addition_test_small.csv<br><br>
+                value a,value b,answer<br>
+                3642,1563,5205<br>
+                672,5541,6213<br>
+                497,4772,5269<br>
+                8326,1643,9969<br>
+                2066,4942,7008<br>
+                7794,127,7921<br>
+                6883,9000,15883<br>
+                3808,789,4597<br>
+                6106,4453,10559<br>
+                6285,7036,13321</p>
+            </div>
+        </div><br>
+
+        <pre><code class="python">
+        def test_addition():
+            """method calling Addition operation"""
+            dataframe = pd.read_csv(data_path)
+            for index, row in dataframe.iterrows():
+                # Arrange & Act
+                addition = Addition.create((row['value a'], row['value b']))
+                result = addition.get_result()
+                # Assert
+                assert result == float(row['answer'])
+        </code>
+        </pre>
+
+        <p>Note that with this test, the arrange and act are done in the same step because the actual addition happens as the addition object is being constructed.</p>
+
+        <br>
+        <a href="/tutorial/article3/">Continue to Part 3: Principles of Object Oriented Programming</a>
+        <br><br>
+    </div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+</body>
+</html>

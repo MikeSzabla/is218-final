@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Azuretorial</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Azuretorial</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/tutorial/">Tutorial</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/tools/git/">Git</a></li>
+                        <li><a class="dropdown-item" href="/tools/docker/">Docker</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="/tools/linux/">Linux Commands</a></li>
+                        <li><a class="dropdown-item" href="/tools/vi/">Vi Editor</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page content-->
+<div class="container">
+    <div class="mt-5">
+        <h1>Deploy your image to Azure</h1>
+        <br>
+        <h3>Log into Azure</h3>
+        <p>Run the following command to log into Azure through Docker:</p>
+        <p><kbd>docker login azure</kbd></p>
+        <p>If you run into any issues, refer to this section of
+            <a href="https://docs.docker.com/cloud/aci-integration/#log-into-azure">Docker documentation</a></p>
+        <br>
+        <h3>Create an ACI context</h3>
+        <p>After logging in, we must create a Docker context associated with ACI (Azure Container Instances) to deploy
+            containers in ACI. Creating an ACI context requires an Azure subscription, a resource group, and a region.
+            Let’s create a new context called ‘azureContext’:</p>
+        <p><kbd>docker context create aci azureContext</kbd></p>
+
+        <p>This command automatically uses your Azure login credentials to identify your subscription IDs and resource
+            groups. You can then interactively select the subscription and group that you would like to use. If you
+            don’t have any existing resource groups in your Azure account, one will be automatically created for you.</p>
+        <br>
+        <h3>Run a container</h3>
+        <p>Now that you’ve logged in and created an ACI context, you can start using Docker commands to deploy
+            containers on ACI. There are two ways to use your new ACI context. You can use the --context flag with the
+            Docker command to specify that you would like to run the command using your newly created ACI context:</p>
+        <p><kbd>docker --context myacicontext run -dp 80:80 username/azurewebsite</kbd></p>
+        <p>Or, you can change context using docker context use to select the ACI context to be your focus for
+        running Docker commands. For example, we can use the docker context use command to deploy an Nginx container:</p>
+        <p>
+            <kbd>docker context use myacicontext</kbd><br>
+            <kbd>docker run -dp 80:80 username/azurewebsite</kbd>
+        </p>
+        <p>After you’ve switched to the myacicontext context, you can use docker ps to list your containers running on
+            ACI. The result of the ps command will display in column “PORTS” the IP address and port on which the
+            container is running. For example, it may show 52.154.202.35:80->80/tcp, and you can view the Nginx welcome
+            page by browsing http://52.154.202.35. To stop and remove a container from ACI, run:</p>
+        <p>
+            <kbd>docker stop &lt;CONTAINER_ID&gt;</kbd><br>
+            <kbd>docker rm &lt;CONTAINER_ID&gt;</kbd>
+        </p>
+        <p>And that’s it! You now know how to make a basic website, host it in a Docker container, and deploy it to an
+            Azure Container Instance!</p>
+        <br><br>
+    </div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+</body>
+</html>

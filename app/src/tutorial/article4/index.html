@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Separartion of Concerns</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<style>
+    #container {
+        background-color: #000000;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        padding: 1em;
+    }
+
+    #content {
+        color: #ffffff;
+        font-size: 14px;
+        font-family: monospace;
+    }
+</style>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">IS128 Tutorials</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/tutorial/">Tutorial</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/tools/git/">Git</a></li>
+                        <li><a class="dropdown-item" href="/tools/docker/">Docker</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="/tools/linux/">Linux Commands</a></li>
+                        <li><a class="dropdown-item" href="/tools/vi/">Vi Editor</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page content-->
+<div class="container">
+    <div class="mt-5">
+        <h1>Separation of Concerns</h1>
+        <br>
+        <h3>Definition</h3>
+        <p>Separation of concerns is a software development principle that deals with the idea of designing your code to be made up of elements that only do one thing. 
+            This ties in closely with the Single Responsibility Principle, which states that classes should have only one responsibility and therefore only one reason to change. 
+            Separation of concerns is a practical practice that ensures changes to one piece of code do not drag down other features as an unintended result. One way to write with 
+            separation of concerns in mind is to create meaningful function/method names and making sure that they only perform the one thing their name describes. For example, 
+            our calculator has many different functions that we can access through calculator instances. 
+            Here are some of those methods (as shown in full in the <a href="https://github.com/MikeSzabla/IS218Project2_examplecode/tree/article4">article4 branch</a>):
+        </p>
+
+        <pre><code class="python">
+            @staticmethod
+            def get_history():
+                """returns the history list storing past operations"""
+                return Calculator.history
+        
+            @staticmethod
+            def add_calculation_to_history(calculation):
+                """adds a calculation to the end of the history"""
+                Calculator.history.append(calculation)
+        
+            @staticmethod
+            def get_result_of_last_calculation():
+                """returns the results of the last item in the calculator history"""
+                return Calculator.get_last_operation().get_result()
+        
+            @staticmethod
+            def get_last_operation():
+                """grabs the latest operation from the history"""
+                return Calculator.get_history()[-1]
+        </code>
+        </pre>
+
+        <p>Every method shown here has exactly one purpose and is named precisely to reflect that purpose. Note the use of <code>get_last_operation</code> and <code>get_history</code>
+            within the other methods. It is not the job of a method like <code>get_result_of_last_calculation</code> to be responsible for retrieving the history if another method 
+            exists whose sole job is to do exactly that. That concern is offloaded onto another method so that others do not have to worry about it.</p>
+
+        <p>This can be extremely useful if the structure of our calculator's history were to ever change. By separation the action of retrieving the history to <code>get_history</code>, 
+        we can simply adjust that one method and the rest of our methods that rely on that functionality will keep working as if nothing ever changed.</p>
+        <br>
+        <br>
+    </div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+</body>
+</html>

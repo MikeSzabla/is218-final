@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Azuretorial</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Azuretorial</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/tutorial/">Tutorial</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/tools/git/">Git</a></li>
+                        <li><a class="dropdown-item" href="/tools/docker/">Docker</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="/tools/linux/">Linux Commands</a></li>
+                        <li><a class="dropdown-item" href="/tools/vi/">Vi Editor</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page content-->
+<div class="container">
+    <div class="mt-5">
+        <h1>Pushing your code to Github</h1>
+        <br>
+        <h3>Create a repository on Github</h3>
+        <p>Before we can push files to a repository, we need to create said repository. Head to github.com, log in,
+            click the ‘+’ in the top right corner, and select ‘New repository’. Give your new repository a name and
+            create it (you don’t need to enable any of the other options).</p>
+        </br>
+        <h3>Initialize the Repository on your Local Machine</h3>
+        <p>We must also turn our local project directory into a local repository to tell git to start tracking files in
+            our project. Run the following command in your project root directory to do so:</p>
+        <p><kbd>git init</kbd></p>
+        </p><br>
+        <h3>Make a Commit</h3>
+        <p>A git commit is a snapshot of your repo at a specific point in time, but before we can make a commit we must
+            stage changes, or specify which changed files we want to include in it. Use the git add command:</p>
+        <p><kbd>git add .</kbd></p>
+        <p>The period indicates that we are staging all of the files/folders in this directory, rather than any
+            particular ones. Next, make the commit:</p>
+        <p><kbd>git commit -m “Initial commit”</kbd></p>
+        <p>The -m flag allows us to add a descriptive message of what the commit changed - you should always add a
+            message to your commits!</p>
+        <br>
+        <h3>Push your commits to GitHub</h3>
+        <p>The final step is to link our local repository to the one we created on GitHub. Let’s name our branch ‘main’
+            and add the GitHub repo as a remote named ‘origin’:</p>
+        <p>
+            <kbd>git branch -M main</kbd><br>
+            <kbd>git remote add origin [GitHub repo URL].git</kbd>
+        </p>
+        <p>Replace the bracketed text with the URL to your created GitHub repo, and make sure to append a ‘.git’ to it.
+            Finally, push your commit to GitHub!</p>
+        <p><kbd>git push -u origin main</kbd></p>
+        <p>This section was not inherently necessary to host a Docker container website on Azure, but knowing how to
+            properly use git is one of the most important and practical skills for any developer. Now, let's continue
+            to the next section.</p>
+        <br>
+        <a href="/tutorial/5/">Continue to Part 5: Build a Docker Image</a>
+        <br><br>
+    </div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+</body>
+</html>

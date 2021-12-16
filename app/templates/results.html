@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Results{% endblock %}
+{% block content %}
+    <!-- Page content-->
+    <div class="container">
+        <div class="mt-5">
+            <h1>Results</h1>
+            <table id="calc_results" class="table table-striped">
+                <thead>
+                    <tr>
+                    <th>Source</th>
+                    <th>Unix Timestamp</th>
+                    <th>Value A</th>
+                    <th>Value B</th>
+                    <th>Operation</th>
+                    <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in calc_results %}
+                        <tr>
+                        <td>{{ result.input_file }}</td>
+                        <td>{{ result.time }}</td>
+                        <td>{{ result.operation }}</td>
+                        <td>{{ result.value_a }}</td>
+                        <td>{{ result.value_b }}</td>
+                        <td>{{ result.result }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br><br>
+            <h1>Exceptions</h1>
+            <table id="exceptions" class="table table-striped">
+                <thead>
+                    <tr>
+                    <th>Source</th>
+                    <th>Value A</th>
+                    <th>Value B</th>
+                    <th>Operation</th>
+                    <th>Error</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for exception in exceptions %}
+                        <tr>
+                        <td>{{ exception.input_file }}</td>
+                        <td>{{ exception.value_a }}</td>
+                        <td>{{ exception.value_b }}</td>
+                        <td>{{ exception.operation }}</td>
+                        <td>{{ exception.error }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $('#calc_results').DataTable({
+                columns: [
+                    null,
+                    {searchable: false},
+                    {orderable: false, searchable: false},
+                    {orderable: false, searchable: false},
+                    null],
+            });
+        });
+    </script>
+{% endblock %}

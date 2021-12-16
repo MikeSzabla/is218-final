@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Azuretorial</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Azuretorial</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/tutorial/">Tutorial</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/tools/git/">Git</a></li>
+                        <li><a class="dropdown-item" href="/tools/docker/">Docker</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="/tools/linux/">Linux Commands</a></li>
+                        <li><a class="dropdown-item" href="/tools/vi/">Vi Editor</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page content-->
+<div class="container">
+    <div class="mt-5">
+        <h1>Create a Docker Container</h1>
+        <br>
+        <h3>Write a docker-compose file</h3>
+        <p>Docker-compose is a tool for running multi-container applications on Docker using the Compose file format. A
+            file called ‘docker-compose.yml’ defines the configuration for each container in YAML (YAML Ain’t Markup
+            Language). Using Vi, create a compose file in the root of your project directory with the following
+            configuration:</p>
+        <code class="text-black">docker-compose.yml</code>
+        <code>
+            <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">version: <span style="background-color: #fff0f0">&quot;3.2&quot;</span>
+services:
+  apache:
+    build: .
+    ports:
+      - <span style="background-color: #fff0f0">&quot;8080:80&quot;</span>
+    volumes:
+      - ./public_html/:/usr/local/apache2/htdocs/
+</pre></div>
+        </code>
+        <br>
+        <p>We also need to add a Dockerfile in order to build an image that we can then deploy to Azure. Similar to how
+            a Docker-compose file can tell Docker how to create and run containers, a Dockerfile can tell Docker how to
+            assemble an image. Using Vi once again, create a new file in the same location as ‘docker-compose.yml’
+            called ‘Dockerfile’ (there should be no file extension) containing the following text:</p>
+        <code class="text-black">Dockerfile</code>
+        <code>
+            <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">
+FROM httpd:2.4
+COPY ./public_html/ /usr/local/apache2/htdocs/
+</pre></div>
+        </code>
+        <br><br>
+        <h3>Start the container locally</h3>
+        <p>Open up your command-line shell of choice (cmd.exe or PowerShell on Windows, Terminal on MacOS) and navigate
+            to your project directory using the <kbd>cd</kbd> command. For help with shell commands, visit our Tools
+            guide on <a href="/tools/linux/">Linux commands</a>.</p>
+        <p>Once you are in the same directory as the docker-compose.yml file we previously created, you can use Docker
+            Compose commands to read that file and create containers based on the configuration specified within. We are
+            first going to create and run our container locally to test our website and make sure everything functions
+            correctly. Execute the following command:</p>
+        <p><kbd>docker compose up -d</kbd></p>
+        <p>Once the container is successfully running, open a web browser and navigate to ‘localhost:8080’ using the
+            address bar. Congratulations, you have created and hosted a basic website! While our container is running,
+            we can update the code in our project folder and Apache will continuously serve the updated files - all you
+            need to do is refresh the page to view any changes. Once you are ready to move on, stop the Docker container
+            with the following command:</p>
+        <p><kbd>docker compose down</kbd></p>
+        <p>You always should stop your local container when you are done using it, otherwise it will continue running in
+            the background wasting your computer’s resources. Before we move on, let’s take a look at how to synchronize
+            our local code with a git repository.</p>
+        <br>
+        <a href="/tutorial/4/">Continue to Part 4: Push Code to GitHub</a>
+        <br><br>
+    </div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+</body>
+</html>
