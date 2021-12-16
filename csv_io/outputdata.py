@@ -12,6 +12,7 @@ class OutputData:
     def __init__(self, input_dataframe):
         OutputData.set_output_data([])
         OutputData.populate_output_data(input_dataframe)
+        print(OutputData.get_output_data())
 
     @staticmethod
     def get_output_data():

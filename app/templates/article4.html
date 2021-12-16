@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}IS218 Flask Page{% endblock %}
+{% block content %}
+    <!-- Page content-->
+    <div class="container">
+        <div class="mt-5">
+        <h1>Separation of Concerns</h1>
+        <br>
+        <h3>Definition</h3>
+        <p>Separation of concerns is a software development principle that deals with the idea of designing your code to be made up of elements that only do one thing.
+            This ties in closely with the Single Responsibility Principle, which states that classes should have only one responsibility and therefore only one reason to change.
+            Separation of concerns is a practical practice that ensures changes to one piece of code do not drag down other features as an unintended result. One way to write with
+            separation of concerns in mind is to create meaningful function/method names and making sure that they only perform the one thing their name describes. For example,
+            our calculator has many different functions that we can access through calculator instances.
+            Here are some of those methods (as shown in full in the <a href="https://github.com/MikeSzabla/IS218Project2_examplecode/tree/article4">article4 branch</a>):
+        </p>
+
+        <pre><code class="python">
+            @staticmethod
+            def get_history():
+                """returns the history list storing past operations"""
+                return Calculator.history
+
+            @staticmethod
+            def add_calculation_to_history(calculation):
+                """adds a calculation to the end of the history"""
+                Calculator.history.append(calculation)
+
+            @staticmethod
+            def get_result_of_last_calculation():
+                """returns the results of the last item in the calculator history"""
+                return Calculator.get_last_operation().get_result()
+
+            @staticmethod
+            def get_last_operation():
+                """grabs the latest operation from the history"""
+                return Calculator.get_history()[-1]
+        </code>
+        </pre>
+
+        <p>Every method shown here has exactly one purpose and is named precisely to reflect that purpose. Note the use of <code>get_last_operation</code> and <code>get_history</code>
+            within the other methods. It is not the job of a method like <code>get_result_of_last_calculation</code> to be responsible for retrieving the history if another method
+            exists whose sole job is to do exactly that. That concern is offloaded onto another method so that others do not have to worry about it.</p>
+
+        <p>This can be extremely useful if the structure of our calculator's history were to ever change. By separation the action of retrieving the history to <code>get_history</code>,
+        we can simply adjust that one method and the rest of our methods that rely on that functionality will keep working as if nothing ever changed.</p>
+        <br>
+        <br>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block title %}IS218 Flask Page{% endblock %}
+{% block content %}
+    <!-- Page content-->
+    <div class="container">
+        <div class="mt-5">
+        <h1>Principles of Object Oriented Programming</h1>
+        <br>
+        <h3>Encapsulation</h3>
+        <p>Encapsulation describes the idea of wrapping data and the methods that work on data within one unit. This is done with the purpose of protecting data from being
+            changed accidentally. The best example of encapsulation in an object-oriented program is a class. A class allows you to create instances of an object that hold
+            it's own data values and methods to manipulate said data. These bits of data could be made private or protected to ensure that they are not touched in the event
+            of a child class that's derived from it. An example of this within the calculator application would be the classes created for each operation:
+            (full scripts viewable <a href="https://github.com/MikeSzabla/IS218Project2_examplecode/tree/article3">here</a>)
+        </p>
+
+        <pre><code class="python">
+            class Addition(Calculation):  # pylint: disable=too-few-public-methods
+                """Addition Class"""
+
+                def get_result(self):   # addition-specific method encapsulated within Addition class
+                    """returns all passed values added together"""
+                    result = self.values[0]
+                    for value in self.values[1:]:
+                        result += value
+                    return result
+        </code>
+        </pre>
+
+        <p>Here, we are encapsulatin get_result method within the Addition class. The get_result function performs a function specific to the Addition class,
+            which is why it's valuable to keep it within these bounds.
+        </p>
+
+        <h3>Inheritance</h3>
+
+        <p>Inheritance is the capability of one class to derive or inherit the properties from another class. This allows programmers to structure their objects in a
+            more realistic manner which follows how people attribute characteristics first on a broad level, then getting more detailed as the focus becomes more narrow.
+            It also gives programmers an opportunity to not repeat themselves; another important principle. For example, our calculator supports many calculations.
+            However, there are some aspects of each calculation that remain constant, such as the existence of values that will be used within the operations.
+        </p>
+
+        <pre><code class="python">
+            # Division class inheriting from parent class Calculation
+            class Division(Calculation):  # pylint: disable=too-few-public-methods
+                """Division Class"""
+
+                def get_result(self):
+                    """returns value_a divided by value_b"""
+                    result = self.values[0]
+                    for value in self.values[1:]:
+                        result = result / value
+                    return result
+        </code>
+        </pre>
+
+        <p>Just like the rest of the calculations, the Division class inherits from Calcuation access to values which were set when the Calculation was first instantiated.</p>
+
+        <h3>Polymorphism</h3>
+
+        <p>Polymorphism is the use of the same function for different uses. This could mean handling a variable amount of variables, or handing different variable types
+            without creating a separate method or function. Polymorphism is extremely useful in statically-typed languages like Java, allowing you to create generic functions
+            that can work with multiple different data types. This both the developer time, decreases program complexity, and creates cleaner code.</p>
+
+        <p>Since python is a dynamically-typed language, we don't have to worry about the data types of our parameters. However, our calculator could benefit greatly from
+            accepting a variable amount of arguments when performing operations. Here are snippets of code demonstrating this taken from <a href="https://github.com/MikeSzabla/IS218Project2_examplecode/tree/article3b">this version</a>
+            of the calculator which has been adjusted to support variable arguments in its calculations instead of tuples:
+        </p>
+
+        <pre><code class="python">
+            def test_addition():
+                """method calling Addition operation"""
+                # Arrange
+                addition = Addition.create(1, 2, 3)  # creating an addition object using 3 parameters to add
+                # Act
+                result = addition.get_result()
+                # Assert
+                assert result == 6
+
+                # Arrange
+                addition2 = Addition.create(1, 2, 3, 4, 5)  # creating an addition object using 5 parameters to add
+                # Act
+                result = addition2.get_result()
+                # Assert
+                assert result == 15
+        </code>
+        </pre>
+
+        <p>Here is a test for the addition operation that accepts a variable amount of parameters. Python allows this because of the <code>*args</code> argument we implemented in our
+            <code>Calculation.create()</code> method:
+        </p>
+
+        <pre><code class="python">
+            class Calculation:  # pylint: disable=too-few-public-methods
+                """Calculation Class"""
+                def __init__(self, *args):
+                    """constructor setting variable amount of args into values tuple stored within the calculation"""
+                    self.values = args
+
+                @classmethod
+                def create(cls, *args):
+                    """class method create"""
+                    return cls(*args)
+        </code>
+        </pre>
+
+        <h3>Abstraction</h3>
+
+        <p>Abstraction is used to hide background details or any unnecessary implementation. In OOP, this often takes the form of abstract classes, which are classes that contain
+            all of the different method declarations the class will need, but none of the content within those methods. This creates a blueprint for children to follow when
+            inheriting from the abstract parent. In the calculator application, there is no explicit use of an abstract class, however the Calculation method does have
+            a single abstract method:
+        </p>
+
+        <pre><code class="python">
+            class Calculation(ABC):  # pylint: disable=too-few-public-methods
+                """Calculation Class"""
+                def __init__(self, args: tuple):
+                    """default constructor setting up value variables"""
+                    self.values = Calculation.args_to_float_tuple(args)
+
+                @abstractmethod
+                # abstract get_result method that must be implemented by every child
+                def get_result(self):
+                    pass
+        </code>
+        </pre>
+
+        <p>Because of this abstract get_result method, all calculations that inherit from Calculation must implement a get_result method.</p>
+        <br>
+        <a href="/tutorial/article4/">Continue to Part 4: Separation of Concerns</a>
+        <br><br>
+    </div>
+    </div>
+{% endblock %}

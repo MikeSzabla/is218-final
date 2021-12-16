@@ -16,7 +16,6 @@ class InputData:
         """Initial constructor that sets variables and generates """
         InputData.input_dir = input_dir
         InputData.set_list_of_input_paths(InputData.generate_list_of_input_paths(input_dir))
-        print("list is", InputData.get_list_of_input_paths(),"path is",input_dir)
         InputData.populate_dataframe(InputData.get_list_of_input_paths())
 
     @staticmethod

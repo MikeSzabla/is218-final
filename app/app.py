@@ -16,10 +16,29 @@ root_dir = Path(__file__).parent.parent
 input_folder_dir = root_dir / 'input'
 output_folder_dir = root_dir / 'output'
 
+
 @app.route("/")
 def index():
     """home page; index route"""
     return render_template('index.html')
+
+
+@app.route("/tutorial/")
+def tutorial():
+    """tutorial page; index route"""
+    return render_template('tutorial.html')
+
+
+@app.route("/tutorial/article3/")
+def tutorial_article3():
+    """tutorial page; index route"""
+    return render_template('article3.html')
+
+
+@app.route("/tutorial/article4/")
+def tutorial_article4():
+    """tutorial page; index route"""
+    return render_template('article4.html')
 
 
 @app.route("/calculator/", methods=['GET', 'POST'])
@@ -65,6 +84,8 @@ def results():
             for row in reader:
                 exceptions.append(row)
 
+        calculation_results.reverse()
+        exceptions.reverse()
         return render_template('results.html', calc_results=calculation_results, exceptions=exceptions)
 
 

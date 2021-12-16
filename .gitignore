@@ -1,0 +1,16 @@
+.idea
+.cache
+.local
+.pytest_cache
+.ash_history
+__pycache__
+.coverage
+
+input/*
+output/*
+done/*
+coverage_html_report/*
+
+!input/.gitkeep
+!output/.gitkeep
+!done/.gitkeep
